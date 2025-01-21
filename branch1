@@ -21,6 +21,22 @@
         .bold {
             font-weight: bold;
         }
+        button {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            font-size: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -39,5 +55,58 @@
     <div class="footer">
         <p>This system is powered by MomsBest Mobile App</p>
     </div>
+
+    <!-- Manual Print Button -->
+    <button id="printButton" onclick="window.print()">Print Receipt</button>
+
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                shopname: params.get('shopname') || 'Default Shop Name',
+                shopaddress: params.get('shopaddress') || 'Default Shop Address',
+                shopcontactnumber: params.get('shopcontactnumber') || '123-456-7890',
+                customername: params.get('customername') || 'John Doe',
+                orderid: params.get('orderid') || '00001',
+                transactiondate: params.get('transactiondate') || '01/01/2025',
+                orderedqty: params.get('orderedqty') || '1',
+                totalamount: params.get('totalamount') || '0.00'
+            };
+        }
+
+        // Function to populate the page and handle printing
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = getQueryParams();
+            document.getElementById('shopname').textContent = params.shopname;
+            document.getElementById('shopaddress').textContent = params.shopaddress;
+            document.getElementById('shopcontactnumber').textContent = params.shopcontactnumber;
+            document.getElementById('customername').textContent = params.customername;
+            document.getElementById('orderid').textContent = params.orderid;
+            document.getElementById('transactiondate').textContent = params.transactiondate;
+            document.getElementById('orderedqty').textContent = params.orderedqty;
+            document.getElementById('totalamount').textContent = params.totalamount;
+
+            try {
+                // Attempt to trigger automatic printing
+                window.print();
+            } catch (error) {
+                console.error('Automatic printing failed:', error);
+                showPrintButton();
+            }
+
+            // Add fallback button if print doesn't trigger
+            setTimeout(showPrintButton, 5000);
+        });
+
+        // Function to display the print button
+        function showPrintButton() {
+            const printButton = document.getElementById('printButton');
+            if (printButton) {
+                printButton.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
+
