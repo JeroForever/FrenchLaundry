@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Receipt</title>
     <style>
+        @page {
+            size: 58mm auto;
+            margin: 0;
+        }
         body {
-            font-family: Arial, sans-serif;
             width: 58mm;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             font-size: 10px;
         }
         .header, .footer {
@@ -109,4 +112,3 @@
     </script>
 </body>
 </html>
-
