@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Receipt</title>
+    <title>Receipt</title>
     <style>
         @page {
-            size: 58mm auto;
+            size: 58mm auto; /* Specify 58mm paper size */
             margin: 0;
         }
         body {
@@ -17,98 +17,40 @@
         }
         .header, .footer {
             text-align: center;
-        }
-        .content {
             margin: 10px 0;
         }
-        .bold {
-            font-weight: bold;
+        .content {
+            margin: 5px 0;
         }
-        button {
-            display: none; /* Hidden by default */
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            padding: 10px 15px;
-            font-size: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
+        .content p {
+            margin: 0;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <p><strong>Shop Name: </strong><span id="shopname"></span></p>
-        <p><strong>Address: </strong><span id="shopaddress"></span></p>
-        <p><strong>Contact: </strong><span id="shopcontactnumber"></span></p>
+        <p><strong>Shop Name</strong></p>
+        <p>Shop Address</p>
+        <p>Contact: 123-456-7890</p>
     </div>
     <div class="content">
-        <p><strong>Customer: </strong><span id="customername"></span></p>
-        <p><strong>Order ID: </strong><span id="orderid"></span></p>
-        <p><strong>Date: </strong><span id="transactiondate"></span></p>
-        <p><strong>Quantity: </strong><span id="orderedqty"></span></p>
-        <p><strong>Total: </strong><span id="totalamount"></span></p>
+        <p><strong>Customer:</strong> John Doe</p>
+        <p><strong>Order ID:</strong> 00001</p>
+        <p><strong>Date:</strong> 01/01/2025</p>
+        <p><strong>Quantity:</strong> 1</p>
+        <p><strong>Total:</strong> $10.00</p>
     </div>
     <div class="footer">
-        <p>This system is powered by MomsBest Mobile App</p>
+        <p>Powered by MomsBest App</p>
     </div>
-
-    <!-- Manual Print Button -->
-    <button id="printButton" onclick="window.print()">Print Receipt</button>
-
     <script>
-        // Function to get URL parameters
-        function getQueryParams() {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                shopname: params.get('shopname') || 'Default Shop Name',
-                shopaddress: params.get('shopaddress') || 'Default Shop Address',
-                shopcontactnumber: params.get('shopcontactnumber') || '123-456-7890',
-                customername: params.get('customername') || 'John Doe',
-                orderid: params.get('orderid') || '00001',
-                transactiondate: params.get('transactiondate') || '01/01/2025',
-                orderedqty: params.get('orderedqty') || '1',
-                totalamount: params.get('totalamount') || '0.00'
-            };
-        }
-
-        // Function to populate the page and handle printing
         document.addEventListener('DOMContentLoaded', function () {
-            const params = getQueryParams();
-            document.getElementById('shopname').textContent = params.shopname;
-            document.getElementById('shopaddress').textContent = params.shopaddress;
-            document.getElementById('shopcontactnumber').textContent = params.shopcontactnumber;
-            document.getElementById('customername').textContent = params.customername;
-            document.getElementById('orderid').textContent = params.orderid;
-            document.getElementById('transactiondate').textContent = params.transactiondate;
-            document.getElementById('orderedqty').textContent = params.orderedqty;
-            document.getElementById('totalamount').textContent = params.totalamount;
-
             try {
-                // Attempt to trigger automatic printing
                 window.print();
             } catch (error) {
-                console.error('Automatic printing failed:', error);
-                showPrintButton();
+                console.error('Printing failed:', error);
             }
-
-            // Add fallback button if print doesn't trigger
-            setTimeout(showPrintButton, 5000);
         });
-
-        // Function to display the print button
-        function showPrintButton() {
-            const printButton = document.getElementById('printButton');
-            if (printButton) {
-                printButton.style.display = 'block';
-            }
-        }
     </script>
 </body>
 </html>
